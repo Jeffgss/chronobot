@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 func _physics_process(delta):
 	player_falling(delta)
-	player_indle(delta)
+	player_idle(delta)
 	player_run(delta)
 	
 	move_and_slide()
@@ -25,7 +25,7 @@ func player_falling(delta):
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
 
-func player_indle(delt):
+func player_idle(delt):
 	if is_on_floor():
 		current_state = State.Idle
 
