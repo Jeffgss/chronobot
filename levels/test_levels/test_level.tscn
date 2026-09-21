@@ -15,7 +15,21 @@ patrol_points = NodePath("PatrolPoints")
 [node name="PatrolPoints" type="Node2D" parent="EnemyCrab" index="2" unique_id=778725009]
 
 [node name="Point1" type="Marker2D" parent="EnemyCrab/PatrolPoints" index="0" unique_id=1030214166]
-position = Vector2(-98, 38)
+position = Vector2(-98, 27)
 
 [node name="Point2" type="Marker2D" parent="EnemyCrab/PatrolPoints" index="1" unique_id=1787845493]
-position = Vector2(72, 38)
+position = Vector2(71, 29)
+
+[node name="EnemyCrab2" parent="." index="3" unique_id=1115824791 node_paths=PackedStringArray("patrol_points") instance=ExtResource("2_rwr5k")]
+position = Vector2(564, -159)
+patrol_points = NodePath("PatrolPoints")
+speed = 3000
+wait_time = 1
+
+[node name="PatrolPoints" type="Node2D" parent="EnemyCrab2" index="3" unique_id=41157967]
+
+[node name="Point1" type="Marker2D" parent="EnemyCrab2/PatrolPoints" index="0" unique_id=278323397]
+position = Vector2(-122, 36)
+
+[node name="Point2" type="Marker2D" parent="EnemyCrab2/PatrolPoints" index="1" unique_id=1570026276]
+position = Vector2(59, 37)

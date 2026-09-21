@@ -26,13 +26,13 @@ func _ready():
 	if patrol_points != null:
 		number_of_points = patrol_points.get_children().size()
 		for point in patrol_points.get_children():
-			point_positions.append(point.global_positions)
+			point_positions.append(point.global_position)
 		current_point = point_positions[current_point_position]
 	else:
 		print("No patrol points")
-		
+	
 	timer.wait_time = wait_time
-
+	
 	current_state = State.Idle
 	
 func _physics_process(delta: float):
@@ -56,24 +56,24 @@ func enemy_walk(delta: float):
 	if !can_walk:
 		return
 	
-	if abs(position.x -current_point.x) > 0.5:
+	if abs(position.x - current_point.x) > 0.5:
 		velocity.x = direction.x * speed * delta
 		current_state = State.Walk
 	else:
 		current_point_position += 1
 		
-	if current_point_position >= number_of_points:
-		current_point_position = 0
+		if current_point_position >= number_of_points:
+			current_point_position = 0
 		
-	current_point = point_positions[current_point_position]
+		current_point = point_positions[current_point_position]
 	
-	if current_point.x > position.x:
-		direction = Vector2.RIGHT
-	else:
-		direction = Vector2.LEFT
-		
-	can_walk = false
-	timer.start()
+		if current_point.x > position.x:
+			direction = Vector2.RIGHT
+		else:
+			direction = Vector2.LEFT
+			
+		can_walk = false
+		timer.start()
 		
 	animated_sprite_2d.flip_h = direction.x > 0
 
@@ -82,8 +82,6 @@ func enemy_animations():
 		animated_sprite_2d.play("idle")
 	elif current_state == State.Walk && can_walk:
 		animated_sprite_2d.play("walk")
-		
-	
 
 func _on_timer_timeout() -> void:
 	can_walk = true
