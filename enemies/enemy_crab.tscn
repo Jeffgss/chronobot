@@ -81,6 +81,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h01by"]
 radius = 13.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j1fnh"]
+radius = 14.0
+
 [node name="EnemyCrab" type="CharacterBody2D" unique_id=1178746098]
 script = ExtResource("1_pm84v")
 
@@ -95,10 +98,19 @@ frame_progress = 0.8186312
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1490418803]
 position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_h01by")
-debug_color = Color(0.7260655, 0.3365995, 0.849929, 0.41960785)
 
 [node name="Timer" type="Timer" parent="." unique_id=1219973847]
 wait_time = 3.0
 autostart = true
 
+[node name="Hutrbox" type="Area2D" parent="." unique_id=1587450352]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hutrbox" unique_id=1782180973]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_j1fnh")
+debug_color = Color(0.9335329, 0.080421634, 0.606263, 0.41960785)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hutrbox" to="." method="_on_hutrbox_area_entered"]

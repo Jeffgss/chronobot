@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bw36w8h7a52lp" path="res://levels/base_level.tscn" id="1_vn7o3"]
 [ext_resource type="PackedScene" uid="uid://b5cl3xei5e7uh" path="res://background/parallax_background.tscn" id="2_jirdo"]
+[ext_resource type="PackedScene" uid="uid://by5skwtuydsnp" path="res://enemies/enemy_crab.tscn" id="3_bt44k"]
 
 [node name="Level1" unique_id=1595681014 instance=ExtResource("1_vn7o3")]
 
@@ -23,3 +24,17 @@ limit_top = -348
 limit_right = 1690
 limit_bottom = 0
 editor_draw_limits = true
+
+[node name="Enemies" type="Node2D" parent="." index="3" unique_id=2063040812]
+
+[node name="EnemyCrab" parent="Enemies" index="0" unique_id=1178746098 node_paths=PackedStringArray("patrol_points") instance=ExtResource("3_bt44k")]
+position = Vector2(312, -32)
+patrol_points = NodePath("PatrolPoints")
+
+[node name="PatrolPoints" type="Node2D" parent="Enemies/EnemyCrab" index="3" unique_id=2047615658]
+
+[node name="Point1" type="Marker2D" parent="Enemies/EnemyCrab/PatrolPoints" index="0" unique_id=566635639]
+position = Vector2(-24, 0)
+
+[node name="Point2" type="Marker2D" parent="Enemies/EnemyCrab/PatrolPoints" index="1" unique_id=1966890388]
+position = Vector2(144, 0)
