@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Chronobot"
-run/main_scene="uid://bw36w8h7a52lp"
+run/main_scene="uid://cj7thnbm33oui"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -52,7 +52,7 @@ shoot={
 
 2d_physics/layer_1="GROUND"
 2d_physics/layer_2="PLAYER"
-2d_physics/layer_3="ENEM"
+2d_physics/layer_3="ENEMY"
 2d_physics/canvas_textures/default_texture_filter=1
 
 [physics]
