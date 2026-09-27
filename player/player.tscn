@@ -247,6 +247,10 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j1fnh"]
 height = 40.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h01by"]
+radius = 11.0
+height = 36.0
+
 [node name="Player" type="CharacterBody2D" unique_id=157843253 groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_g1dw6")
@@ -265,3 +269,14 @@ shape = SubResource("CapsuleShape2D_j1fnh")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=2134078923]
 position = Vector2(17, -25)
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1337363757]
+collision_layer = 2
+collision_mask = 4
+
+[node name="HurtboxCollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=633262982]
+position = Vector2(0, -20)
+shape = SubResource("CapsuleShape2D_h01by")
+debug_color = Color(0.9092646, 0.06555143, 0.71060634, 0.41960785)
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

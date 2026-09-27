@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bw36w8h7a52lp" path="res://levels/base_level.tscn" id="1_7dtao"]
 [ext_resource type="PackedScene" uid="uid://b5cl3xei5e7uh" path="res://background/parallax_background.tscn" id="2_kpfnq"]
 [ext_resource type="PackedScene" uid="uid://c35gpnmul8tf0" path="res://enemies/dino/enemy_dino.tscn" id="3_kpfnq"]
+[ext_resource type="PackedScene" uid="uid://by5skwtuydsnp" path="res://enemies/crab/enemy_crab.tscn" id="4_hvxhd"]
+[ext_resource type="PackedScene" uid="uid://jnngkb5ctdkj" path="res://ui/game_screen.tscn" id="5_mo4vu"]
 
 [node name="TestLevel" unique_id=1595681014 instance=ExtResource("1_7dtao")]
 
@@ -16,3 +18,10 @@ position = Vector2(31, -68)
 
 [node name="EnemyDino" parent="." index="3" unique_id=1161522512 instance=ExtResource("3_kpfnq")]
 position = Vector2(181, -82)
+
+[node name="EnemyCrab" parent="." index="4" unique_id=1178746098 instance=ExtResource("4_hvxhd")]
+position = Vector2(343, -69)
+speed = 1500
+wait_time = 3
+
+[node name="GameScreen" parent="." index="5" unique_id=706626497 instance=ExtResource("5_mo4vu")]
