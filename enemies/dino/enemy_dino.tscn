@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://gpo3rtc4u00y" path="res://enemies/dino/dino-idle.png" id="2_4hrw4"]
 [ext_resource type="Script" uid="uid://de85jy1w2gtui" path="res://enemies/dino/gravity.gd" id="3_0bklh"]
 [ext_resource type="Script" uid="uid://cn6toaonnpevu" path="res://scripts/state_machine/node_finite_state_machine.gd" id="4_4hrw4"]
+[ext_resource type="Script" uid="uid://c2epnn62d6fif" path="res://enemies/dino/state_machine_controller.gd" id="4_lxac6"]
+[ext_resource type="Script" uid="uid://cmufbv2dcubqw" path="res://enemies/dino/idle_state.gd" id="5_ng162"]
+[ext_resource type="Script" uid="uid://dtt17kgibr75" path="res://enemies/dino/attack_state.gd" id="6_ng162"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ng162"]
 atlas = ExtResource("1_5pvth")
@@ -102,6 +105,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h01by"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j1fnh"]
+radius = 54.00926
+
 [node name="EnemyDino" type="CharacterBody2D" unique_id=1161522512]
 collision_layer = 4
 
@@ -120,5 +126,34 @@ script = ExtResource("3_0bklh")
 character_body_2d = NodePath("..")
 animated_sprite_2d = NodePath("../AnimatedSprite2D")
 
-[node name="StateMachine" type="Node" parent="." unique_id=2131417480]
+[node name="StateMachineController" type="Node" parent="." unique_id=820171062 node_paths=PackedStringArray("node_finite_state_machine")]
+script = ExtResource("4_lxac6")
+node_finite_state_machine = NodePath("../StateMachine")
+
+[node name="StateMachine" type="Node" parent="." unique_id=2131417480 node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("4_4hrw4")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1267100137 node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("5_ng162")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+slow_down_speed = 300
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1531331000 node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("6_ng162")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+speed = 100
+
+[node name="AttackArea2D" type="Area2D" parent="." unique_id=589700814]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1344713305]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_j1fnh")
+debug_color = Color(0.71643716, 0.47861248, 0.16980779, 0.41960785)
+
+[connection signal="body_entered" from="AttackArea2D" to="StateMachineController" method="_on_attack_area_2d_body_entered"]
+[connection signal="body_exited" from="AttackArea2D" to="StateMachineController" method="_on_attack_area_2d_body_exited"]
