@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ga4ao0p4cd17" path="res://player/player.tscn" id="2_hjsbj"]
 [ext_resource type="Texture2D" uid="uid://dc04lhbc4k7k0" path="res://background/props.png" id="2_satuh"]
 [ext_resource type="Texture2D" uid="uid://bjbupkrrutimn" path="res://background/walls.png" id="3_p5284"]
+[ext_resource type="Script" uid="uid://db1q710juadi1" path="res://player/player_camera_2d.gd" id="5_p5284"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hjsbj"]
 texture = ExtResource("1_80vhd")
@@ -275,4 +276,7 @@ layer_2/z_index = 1
 [node name="Player" parent="." unique_id=157843253 instance=ExtResource("2_hjsbj")]
 position = Vector2(32, -157)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=656581865]
+[node name="PlayerCamera2D" type="Camera2D" parent="." unique_id=656581865 node_paths=PackedStringArray("player")]
+position = Vector2(32, -157)
+script = ExtResource("5_p5284")
+player = NodePath("../Player")
