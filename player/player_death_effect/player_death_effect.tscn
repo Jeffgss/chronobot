@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cgfv1heb23eln"]
+
+[ext_resource type="Script" uid="uid://c44au6ngivr0q" path="res://player/player_death_effect/player_death_effect.gd" id="1_l4qkf"]
+[ext_resource type="Texture2D" uid="uid://da8gpfx3cpre7" path="res://player/player_death_effect/slash-circular.png" id="2_nmfli"]
+
+[sub_resource type="Gradient" id="Gradient_ajjar"]
+colors = PackedColorArray(0.5568628, 0.84705883, 0.98039216, 1, 0.20392157, 0.65882355, 0.87058824, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j1fnh"]
+gradient = SubResource("Gradient_ajjar")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h01by"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -13, 0)
+emission_shape = 1
+emission_sphere_radius = 35.0
+direction = Vector3(0, -0.5, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_j1fnh")
+anim_speed_min = 1.5
+anim_speed_max = 1.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtdal"]
+atlas = ExtResource("2_nmfli")
+region = Rect2(0, 0, 52, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6qre"]
+atlas = ExtResource("2_nmfli")
+region = Rect2(52, 0, 52, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ec8q4"]
+atlas = ExtResource("2_nmfli")
+region = Rect2(104, 0, 52, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdu2b"]
+atlas = ExtResource("2_nmfli")
+region = Rect2(156, 0, 52, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sjm7"]
+atlas = ExtResource("2_nmfli")
+region = Rect2(208, 0, 52, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ok8l"]
+atlas = ExtResource("2_nmfli")
+region = Rect2(260, 0, 52, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ewbk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtdal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6qre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ec8q4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdu2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sjm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ok8l")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"death_effect",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerDeathEffect" type="Node2D" unique_id=1542912164]
+script = ExtResource("1_l4qkf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1016996472]
+amount = 100
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_h01by")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=986391025]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_8ewbk")
+animation = &"death_effect"
+autoplay = "death_effect"
+
+[node name="Timer" type="Timer" parent="." unique_id=1493200241]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

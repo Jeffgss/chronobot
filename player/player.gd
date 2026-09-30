@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var bullet = preload("res://player/bullet.tscn")
+var player_death_effect = preload("res://player/player_death_effect/player_death_effect.tscn")
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var muzzle: Marker2D = $Muzzle
@@ -61,7 +62,7 @@ func player_jump(delta: float):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump
 		current_state = State.Jump
-		
+
 	if !is_on_floor() and current_state == State.Jump:
 		var direction = input_movement()
 		velocity.x += direction * jump_horizontal_speed * delta
@@ -69,14 +70,14 @@ func player_jump(delta: float):
 
 func player_shooting(delta:float):
 	var direction = input_movement()
-	
+
 	if direction != 0 and Input.is_action_just_pressed("shoot"):
 		var bullet_instance = bullet.instantiate() as Node2D
 		bullet_instance.direction = direction
 		bullet_instance.global_position = muzzle.global_position
 		get_parent().add_child(bullet_instance)
 		current_state = State.Shoot
-		
+
 func player_muzzle_position():
 	var direction = input_movement()
 	
@@ -95,6 +96,12 @@ func player_animations():
 	elif current_state == State.Shoot:
 		animated_sprite_2d.play("run_shoot")
 
+func player_death():
+	var player_death_effect_instance = player_death_effect.instantiate() as Node2D
+	player_death_effect_instance.global_position = global_position
+	get_parent().add_child(player_death_effect_instance)
+	queue_free()
+
 func input_movement():
 	var direction: float = Input.get_axis("move_left", "move_right")
 	
@@ -104,3 +111,6 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
 		hit_animation_player.play("hit")
 		HealthManager.decrease_health(body.damage_amount)
+		
+	if HealthManager.current_health == 0:
+		player_death()
