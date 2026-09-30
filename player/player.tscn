@@ -1,10 +1,16 @@
 [gd_scene format=3 uid="uid://ga4ao0p4cd17"]
 
 [ext_resource type="Script" uid="uid://dh88hmknumy6l" path="res://player/player.gd" id="1_g1dw6"]
+[ext_resource type="Shader" uid="uid://dopjohwqeym2r" path="res://player/player_git_flash_shader.tres" id="2_g6k8r"]
 [ext_resource type="Texture2D" uid="uid://di8p37w06aldq" path="res://player/player-idle.png" id="2_yw30f"]
 [ext_resource type="Texture2D" uid="uid://c5nar2wek3nnh" path="res://player/player-run.png" id="3_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://ckltj3od2pko" path="res://player/player-jump.png" id="3_yw30f"]
 [ext_resource type="Texture2D" uid="uid://4jphci8xxpb5" path="res://player/player-run-shoot.png" id="5_qjkh3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4lq24"]
+shader = ExtResource("2_g6k8r")
+shader_parameter/enabled = false
+shader_parameter/hit_color = Color(0.745098, 0.019608, 0.133333, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
 atlas = ExtResource("2_yw30f")
@@ -251,11 +257,49 @@ height = 40.0
 radius = 11.0
 height = 36.0
 
+[sub_resource type="Animation" id="Animation_boad6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rgyib"]
+resource_name = "hit"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg6s5"]
+_data = {
+&"RESET": SubResource("Animation_boad6"),
+&"hit": SubResource("Animation_rgyib")
+}
+
 [node name="Player" type="CharacterBody2D" unique_id=157843253 groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_g1dw6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1045820926]
+material = SubResource("ShaderMaterial_4lq24")
 position = Vector2(-1, -24)
 sprite_frames = SubResource("SpriteFrames_h01by")
 animation = &"run_shoot"
@@ -264,6 +308,7 @@ frame = 9
 frame_progress = 0.893901
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1052586496]
+visible = false
 position = Vector2(0, -20)
 shape = SubResource("CapsuleShape2D_j1fnh")
 
@@ -271,6 +316,7 @@ shape = SubResource("CapsuleShape2D_j1fnh")
 position = Vector2(17, -25)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1337363757]
+visible = false
 collision_layer = 2
 collision_mask = 4
 
@@ -278,5 +324,8 @@ collision_mask = 4
 position = Vector2(0, -20)
 shape = SubResource("CapsuleShape2D_h01by")
 debug_color = Color(0.9092646, 0.06555143, 0.71060634, 0.41960785)
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="." unique_id=771536290]
+libraries/ = SubResource("AnimationLibrary_hg6s5")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
