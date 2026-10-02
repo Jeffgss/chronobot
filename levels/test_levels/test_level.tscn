@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b5cl3xei5e7uh" path="res://background/parallax_background.tscn" id="2_kpfnq"]
 [ext_resource type="PackedScene" uid="uid://c35gpnmul8tf0" path="res://enemies/dino/enemy_dino.tscn" id="3_kpfnq"]
 [ext_resource type="PackedScene" uid="uid://b7l2v42kjhk6x" path="res://pickups/health_pickup/health_pickup.tscn" id="3_n6wdg"]
+[ext_resource type="PackedScene" uid="uid://2fvagxnodpc8" path="res://collectibles/blue_coin/blue_coin.tscn" id="4_dvnjj"]
 [ext_resource type="PackedScene" uid="uid://by5skwtuydsnp" path="res://enemies/crab/enemy_crab.tscn" id="4_hvxhd"]
 [ext_resource type="PackedScene" uid="uid://jnngkb5ctdkj" path="res://ui/game_screen.tscn" id="5_mo4vu"]
 
@@ -19,13 +20,18 @@ layer_0/tile_data = PackedInt32Array(-196553, 983040, 8, -262089, 983040, 8, -26
 [node name="HealthPickup" parent="Pickups" index="0" unique_id=1757734284 instance=ExtResource("3_n6wdg")]
 position = Vector2(448, -90)
 
-[node name="Player" parent="." index="3" unique_id=157843253]
+[node name="Collectibles" type="Node" parent="." index="3" unique_id=1998178141]
+
+[node name="BlueCoin" parent="Collectibles" index="0" unique_id=863148142 instance=ExtResource("4_dvnjj")]
+position = Vector2(506, -91)
+
+[node name="Player" parent="." index="4" unique_id=157843253]
 position = Vector2(31, -68)
 
-[node name="EnemyDino" parent="." index="4" unique_id=1161522512 instance=ExtResource("3_kpfnq")]
+[node name="EnemyDino" parent="." index="5" unique_id=1161522512 instance=ExtResource("3_kpfnq")]
 position = Vector2(181, -82)
 
-[node name="EnemyCrab" parent="." index="5" unique_id=1178746098 instance=ExtResource("4_hvxhd")]
+[node name="EnemyCrab" parent="." index="6" unique_id=1178746098 instance=ExtResource("4_hvxhd")]
 position = Vector2(343, -69)
 
-[node name="GameScreen" parent="." index="6" unique_id=706626497 instance=ExtResource("5_mo4vu")]
+[node name="GameScreen" parent="." index="7" unique_id=706626497 instance=ExtResource("5_mo4vu")]

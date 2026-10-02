@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*uid://d0yek6q3dlpcx"
 HealthManager="*uid://b28ikxaf58tjk"
+CollectibleManager="*uid://dvjq34ktx4snw"
 
 [display]
 
@@ -59,6 +60,7 @@ shoot={
 2d_physics/layer_2="PLAYER"
 2d_physics/layer_3="ENEMY"
 2d_physics/layer_4="PICKUP"
+2d_physics/layer_5="COLLECTIBLES"
 2d_physics/canvas_textures/default_texture_filter=1
 
 [physics]
