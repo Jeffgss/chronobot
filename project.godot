@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Chronobot"
-run/main_scene="uid://cj7thnbm33oui"
+run/main_scene="uid://86vd5s3c4njx"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
