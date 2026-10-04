@@ -15,11 +15,13 @@ const GRAVITY = 1000
 @export var jump: int = -300
 @export var jump_horizontal_speed: int = 1000
 @export var max_jump_horiontal_speed: int = 300
+@export var jump_count: int = 1
 
 enum State { Idle, Run, Jump, Shoot }
 
 var current_state: State
 var muzzle_position
+var current_jump_count: int
 
 func _ready() -> void:
 	current_state = State.Idle
@@ -59,8 +61,17 @@ func player_run(delta: float):
 		animated_sprite_2d.flip_h = false if direction > 0 else true
 
 func player_jump(delta: float):
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	var jump_input: bool =  Input.is_action_just_pressed("jump")
+	
+	if jump_input and is_on_floor():
+		current_jump_count = 0
 		velocity.y = jump
+		current_jump_count += 1
+		current_state = State.Jump
+		
+	if !is_on_floor() and jump_input and current_jump_count < jump_count:
+		velocity.y = jump
+		current_jump_count += 1
 		current_state = State.Jump
 
 	if !is_on_floor() and current_state == State.Jump:
