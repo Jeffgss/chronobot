@@ -21,6 +21,7 @@ GameManager="*uid://d0yek6q3dlpcx"
 HealthManager="*uid://b28ikxaf58tjk"
 CollectibleManager="*uid://dvjq34ktx4snw"
 SettingsManager="*uid://bkuqefu0lar7p"
+SceneManager="*uid://dqcki4olsvoyk"
 
 [display]
 
@@ -62,6 +63,7 @@ shoot={
 2d_physics/layer_3="ENEMY"
 2d_physics/layer_4="PICKUP"
 2d_physics/layer_5="COLLECTIBLES"
+2d_physics/layer_6="DOORS"
 2d_physics/canvas_textures/default_texture_filter=1
 
 [physics]
