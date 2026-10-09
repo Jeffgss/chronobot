@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://by5skwtuydsnp" path="res://enemies/crab/enemy_crab.tscn" id="4_hvxhd"]
 [ext_resource type="PackedScene" uid="uid://cnma3487ceg8e" path="res://collectibles/green_diamond/green_diamond.tscn" id="5_1digy"]
 [ext_resource type="PackedScene" uid="uid://jnngkb5ctdkj" path="res://ui/game_screen.tscn" id="5_mo4vu"]
+[ext_resource type="PackedScene" uid="uid://ge0x0e1kwv40" path="res://levels/keys/key.tscn" id="7_s108n"]
 [ext_resource type="PackedScene" uid="uid://uai73eoa0rrb" path="res://levels/door/door.tscn" id="9_4her3"]
 
 [node name="TestLevel" unique_id=1595681014 instance=ExtResource("1_7dtao")]
@@ -31,19 +32,27 @@ position = Vector2(506, -91)
 position = Vector2(575, -92)
 award_amount = 5
 
-[node name="Player" parent="." index="4" unique_id=157843253]
+[node name="Door1" type="Node" parent="." index="4" unique_id=1401977371]
+
+[node name="Door" parent="Door1" index="0" unique_id=2072127733 instance=ExtResource("9_4her3")]
+position = Vector2(652, -64)
+rotation = 3.1415925
+scale = Vector2(1, -1)
+next_scene = "Level1"
+key_id = "1234"
+
+[node name="Key" parent="Door1" index="1" unique_id=1855518549 instance=ExtResource("7_s108n")]
+position = Vector2(399, -90)
+key_id = "1234"
+
+[node name="Player" parent="." index="5" unique_id=157843253]
 position = Vector2(31, -68)
 jump_count = 3
 
-[node name="EnemyDino" parent="." index="5" unique_id=1161522512 instance=ExtResource("3_kpfnq")]
+[node name="EnemyDino" parent="." index="6" unique_id=1161522512 instance=ExtResource("3_kpfnq")]
 position = Vector2(181, -82)
 
-[node name="EnemyCrab" parent="." index="6" unique_id=1178746098 instance=ExtResource("4_hvxhd")]
+[node name="EnemyCrab" parent="." index="7" unique_id=1178746098 instance=ExtResource("4_hvxhd")]
 position = Vector2(343, -69)
 
-[node name="GameScreen" parent="." index="7" unique_id=706626497 instance=ExtResource("5_mo4vu")]
-
-[node name="Door" parent="." index="9" unique_id=2072127733 instance=ExtResource("9_4her3")]
-position = Vector2(652, -64)
-scale = Vector2(-1, 1)
-next_scene = "Level1"
+[node name="GameScreen" parent="." index="8" unique_id=706626497 instance=ExtResource("5_mo4vu")]
